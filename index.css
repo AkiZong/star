@@ -1,148 +1,1507 @@
+@charset "UTF-8";
+/*
+
+Rem/Px Function
+---
+This is a fun one. If we support rems, calculate rems according to a pixel
+value. If not, just spit out the pixel value. This means we can detect rem
+support and spit out the stylesheet accordingly, all while writing only one
+codebase.
+
+*/
+/* Neat 1.7.0
+ * http://neat.bourbon.io
+ * Copyright 2012-2014 thoughtbot, inc.
+ * MIT License */
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit; }
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
 body {
-    color: #000;
-    background: #fff;
-    margin: 0;
-    padding: 0;
-    font-family: Georgia, Palatino, serif;
-}
+  margin: 0; }
 
-h1.name {
-    font-style: italic;
-    font-size: 60px;
-    text-align: center;
-}
+h1, h2, h3, h4, h5, h6, p, blockquote, figure, ol, ul {
+  margin: 0;
+  padding: 0; }
 
-/* mainnav */
+li {
+  display: block; }
 
-ul.mainnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    background-color: #FBEFF8;
-    width: 100%;
-}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
 
-ul.mainnav li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
+address, article, aside, audio, blockquote, canvas, dd, div, dl, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, noscript, ol, output, p, pre, section, table, tfoot, ul, video {
+  box-sizing: border-box; }
 
-ul.mainnav li {
-    float: left;
-}
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: normal; }
 
-a.mainnav:link {
-    color: black;
-}
+a {
+  text-decoration: none;
+  color: inherit; }
 
-a.mainnav:visited {
-    color: grey;
-}
+img {
+  max-width: 100%;
+  height: auto;
+  border: 0; }
 
-a.mainnav:hover {
-    color: hotpink;
-}
+button, input, optgroup, select, textarea, form {
+  color: inherit;
+  font: inherit;
+  margin: 0; }
 
-a.mainnav:active {
-    color: red;
-}
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0; }
 
-/* dropdown */
-.dropbtn {
-    background-color: #FBEFF8;
-    font-family: 'Nunito-Bold';
-    font-size: 16px;
-    color: black;
-    padding: 14px;
-    border: none;
-    cursor: pointer;
-}
+/*
 
-.dropdown {
+Variables
+---
+Sitewide variables. Stuff that only pertains to one component can go in that
+component's file, at the top.
+
+*/
+/* Use these by default, but do not be bound by them! Responsive is about
+   making stuff work well and look good—sometimes you need more than just the
+   prescribed sizes. */
+/* Don't use these willy-nilly. Tying lots of things to a value can cause
+   layout brittleness. */
+/*
+
+Base
+---
+AKA the only place that top-level bare element declarations should ever happen.
+
+*/
+body {
+  background-color: #EFEFEF;
+  color: #333333;
+  font-family: "chaparral-pro", Georgia, serif; }
+
+a {
+  -webkit-transition: color 0.15s ease;
+  -moz-transition: color 0.15s ease;
+  transition: color 0.15s ease;
+  color: #CC0000; }
+  a:hover {
+    color: #730000; }
+
+/*
+
+Inputs
+---
+Styling text-based input fields, and adding some options to make form-building
+easy and fun for the whole family.
+
+*/
+input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 2.5rem;
+  padding: 0.375rem 0.625rem;
+  background-color: white;
+  border: 1px solid #DADADA;
+  border-radius: 2px;
+  color: #333333;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.5rem; }
+  input[type="email"]::-webkit-input-placeholder, input[type="number"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder, input[type="search"]::-webkit-input-placeholder, input[type="tel"]::-webkit-input-placeholder, input[type="text"]::-webkit-input-placeholder, input[type="url"]::-webkit-input-placeholder, input[type="color"]::-webkit-input-placeholder, input[type="date"]::-webkit-input-placeholder, input[type="datetime"]::-webkit-input-placeholder, input[type="datetime-local"]::-webkit-input-placeholder, input[type="month"]::-webkit-input-placeholder, input[type="time"]::-webkit-input-placeholder, input[type="week"]::-webkit-input-placeholder {
+    color: #888888;
+    font-style: italic; }
+  input[type="email"]::-moz-placeholder, input[type="number"]::-moz-placeholder, input[type="password"]::-moz-placeholder, input[type="search"]::-moz-placeholder, input[type="tel"]::-moz-placeholder, input[type="text"]::-moz-placeholder, input[type="url"]::-moz-placeholder, input[type="color"]::-moz-placeholder, input[type="date"]::-moz-placeholder, input[type="datetime"]::-moz-placeholder, input[type="datetime-local"]::-moz-placeholder, input[type="month"]::-moz-placeholder, input[type="time"]::-moz-placeholder, input[type="week"]::-moz-placeholder {
+    color: #888888;
+    font-style: italic; }
+  input[type="email"]:-moz-placeholder, input[type="number"]:-moz-placeholder, input[type="password"]:-moz-placeholder, input[type="search"]:-moz-placeholder, input[type="tel"]:-moz-placeholder, input[type="text"]:-moz-placeholder, input[type="url"]:-moz-placeholder, input[type="color"]:-moz-placeholder, input[type="date"]:-moz-placeholder, input[type="datetime"]:-moz-placeholder, input[type="datetime-local"]:-moz-placeholder, input[type="month"]:-moz-placeholder, input[type="time"]:-moz-placeholder, input[type="week"]:-moz-placeholder {
+    color: #888888;
+    font-style: italic; }
+  input[type="email"]:-ms-input-placeholder, input[type="number"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder, input[type="search"]:-ms-input-placeholder, input[type="tel"]:-ms-input-placeholder, input[type="text"]:-ms-input-placeholder, input[type="url"]:-ms-input-placeholder, input[type="color"]:-ms-input-placeholder, input[type="date"]:-ms-input-placeholder, input[type="datetime"]:-ms-input-placeholder, input[type="datetime-local"]:-ms-input-placeholder, input[type="month"]:-ms-input-placeholder, input[type="time"]:-ms-input-placeholder, input[type="week"]:-ms-input-placeholder {
+    color: #888888;
+    font-style: italic; }
+  input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus {
+    border: 1px solid #888888;
+    outline: 0; }
+  input[type="email"].block, input[type="number"].block, input[type="password"].block, input[type="search"].block, input[type="tel"].block, input[type="text"].block, input[type="url"].block, input[type="color"].block, input[type="date"].block, input[type="datetime"].block, input[type="datetime-local"].block, input[type="month"].block, input[type="time"].block, input[type="week"].block {
+    display: block; }
+  input[type="email"].expand, input[type="number"].expand, input[type="password"].expand, input[type="search"].expand, input[type="tel"].expand, input[type="text"].expand, input[type="url"].expand, input[type="color"].expand, input[type="date"].expand, input[type="datetime"].expand, input[type="datetime-local"].expand, input[type="month"].expand, input[type="time"].expand, input[type="week"].expand {
+    width: 100%; }
+  input[type="email"].space-bottom, input[type="number"].space-bottom, input[type="password"].space-bottom, input[type="search"].space-bottom, input[type="tel"].space-bottom, input[type="text"].space-bottom, input[type="url"].space-bottom, input[type="color"].space-bottom, input[type="date"].space-bottom, input[type="datetime"].space-bottom, input[type="datetime-local"].space-bottom, input[type="month"].space-bottom, input[type="time"].space-bottom, input[type="week"].space-bottom {
+    margin-bottom: 0.9375rem; }
+
+/*
+
+Buttons
+---
+Styles for `<button>`, `<input type="submit">`, and plain old `.button`.
+
+*/
+input[type="button"], input[type="reset"], input[type="submit"], .button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: background-color 0.15s ease;
+  -moz-transition: background-color 0.15s ease;
+  transition: background-color 0.15s ease;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 2.5rem;
+  padding: 0.75rem 0.625rem;
+  background-color: #CC0000;
+  border: 0;
+  border-radius: 2px;
+  color: white;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer; }
+  input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus, .button:focus {
+    text-decoration: underline;
+    outline: 0; }
+  input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, .button:hover {
+    color: white;
+    background-color: #730000; }
+  input[type="button"]:disabled, input[type="reset"]:disabled, input[type="submit"]:disabled, .button:disabled {
+    cursor: default;
+    pointer-events: none; }
+
+/*
+
+Labels
+---
+Form labels. If there's a bunch of stuff in this file, it should probably
+instead go into a component file for use in a specific context. Keep it simple,
+you beautiful human being, you.
+
+*/
+label {
+  display: block; }
+  label[hidden] {
+    display: none !important; }
+
+/*
+* Symbolset
+* www.symbolset.com
+* Copyright © 2012 Oak Studios LLC
+*
+* Upload this file to your web server
+* and place this within your <head> tags.
+* <link href="webfonts/ss-standard.css" rel="stylesheet" />
+*/
+@font-face {
+  font-family: "SSStandard";
+  src: url('../fonts/ss-standard.eot');
+  src: url('../fonts/ss-standard.eot?#iefix') format('embedded-opentype'), url('../fonts/ss-standard.woff') format('woff'), url('../fonts/ss-standard.ttf') format('truetype'), url('../fonts/ss-standard.svg#SSStandard') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
+/* This triggers a redraw in IE to Fix IE8's :before content rendering. */
+html:hover [class^="ss-"] {
+  -ms-zoom: 1; }
+
+.ss-icon, .ss-icon.ss-standard, [class^="ss-"]:before, [class*=" ss-"]:before, [class^="ss-"].ss-standard:before, [class*=" ss-"].ss-standard:before, [class^="ss-"].right:after, [class*=" ss-"].right:after, [class^="ss-"].ss-standard.right:after, [class*=" ss-"].ss-standard.right:after {
+  font-family: "SSStandard";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  /*-webkit-font-feature-settings: "liga"; Currently broken in Chrome >= v22. Falls back to text-rendering. Safari is unaffected. */
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased; }
+
+[class^="ss-"].right:before, [class*=" ss-"].right:before {
+  display: none;
+  content: ''; }
+
+.ss-search:before, .ss-search.right:after {
+  content: '🔎'; }
+
+.ss-mail:before, .ss-mail.right:after {
+  content: '✉'; }
+
+.ss-print:before, .ss-print.right:after {
+  content: '⎙'; }
+
+.ss-dropdown:before, .ss-dropdown.right:after {
+  content: '▾'; }
+
+/* Legacy classes */
+/*
+* Symbolset
+* www.symbolset.com
+* Copyright © 2013 Oak Studios LLC
+*
+* Upload this file to your web server
+* and place this within your <head> tags.
+* <link href="webfonts/ss-social-regular.css" rel="stylesheet" />
+*/
+@font-face {
+  font-family: "SSSocialRegular";
+  src: url('../fonts/ss-social-regular.eot');
+  src: url('../fonts/ss-social-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/ss-social-regular.woff') format('woff'), url('../fonts/ss-social-regular.ttf') format('truetype'), url('../fonts/ss-social-regular.svg#SSSocialRegular') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
+/* This triggers a redraw in IE to Fix IE8's :before content rendering. */
+html:hover [class^="ss-"] {
+  -ms-zoom: 1; }
+
+.ss-icon, .ss-icon.ss-social-regular, [class^="ss-"]:before, [class*=" ss-"]:before, [class^="ss-"].ss-social-regular:before, [class*=" ss-"].ss-social-regular:before, [class^="ss-"].right:after, [class*=" ss-"].right:after, [class^="ss-"].ss-social-regular.right:after, [class*=" ss-"].ss-social-regular.right:after {
+  font-family: "SSSocialRegular";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  /*-webkit-font-feature-settings: "liga"; Currently broken in Chrome >= v22. Falls back to text-rendering. Safari is unaffected. */
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased; }
+
+[class^="ss-"].right:before, [class*=" ss-"].right:before {
+  display: none;
+  content: ''; }
+
+.ss-facebook:before, .ss-facebook.right:after {
+  content: ''; }
+
+.ss-twitter:before, .ss-twitter.right:after {
+  content: ''; }
+
+/* Legacy */
+/*
+
+Inline Block Border
+---
+Provides spacing and a border for inline-block elements, notably navigation
+links on tablet and above. Select the elements you want to border and include.
+
+*/
+/*
+
+Directory
+---
+Container for three (or more?) short items that link out elsewhere.
+
+*/
+/*
+
+Directory Chunks
+---
+Bits and pieces for the directory classes, separated by intent.
+
+*/
+/* 
+We only need borders on the middle item, but they're different borders in
+different breakpoints 
+*/
+/* 
+Display as table-cell in tablet to make sure that the borders match up evenly 
+for uneven heights; add some staggered padding to middle and right columns
+to account for the possibility of a floating thumbnail 
+*/
+.highlighted-content, .osf-row {
+  font-family: "chaparral-pro", Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.4375rem; }
+  @media screen and (min-width: 48rem)  {
+    .highlighted-content, .osf-row {
+      display: table;
+      width: 100%;
+      font-size: 1rem;
+      line-height: 1.375rem; } }
+
+.highlighted-item, .osf-item {
+  padding: 1.875rem 0.9375rem 1.25rem; }
+  .highlighted-item:nth-child(3n+2), .osf-item:nth-child(3n+2) {
+    border-color: #DADADA;
+    border-style: solid;
+    border-width: 0;
+    border-top-width: 1px;
+    border-bottom-width: 1px; }
+    @media screen and (min-width: 48rem)  {
+      .highlighted-item:nth-child(3n+2), .osf-item:nth-child(3n+2) {
+        border-width: 0;
+        border-left-width: 1px;
+        border-right-width: 1px; } }
+  @media screen and (min-width: 48rem)  {
+    .highlighted-item, .osf-item {
+      display: table-cell;
+      width: 33.3333333333%;
+      padding-bottom: 1.875rem; } }
+
+/*
+
+Content Label
+---
+Cute li'l subheading used all over the place.
+
+*/
+.popover-label, .mailing-list-label, .book-buy-heading, .press-subsection-label, .highlighted-item-group, .osf-directory-heading {
+  margin-bottom: 0.3125rem;
+  color: #888888;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  text-transform: uppercase; }
+  .popover-label i, .mailing-list-label i, .book-buy-heading i, .press-subsection-label i, .highlighted-item-group i, .osf-directory-heading i {
+    vertical-align: middle;
+    margin-right: 0.1875rem; }
+
+/*
+
+Site Wrapper
+---
+Does what it says on the tin.
+
+*/
+.site-wrapper {
+  max-width: 60em;
+  margin-left: auto;
+  margin-right: auto; }
+  .site-wrapper:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (min-width: 48rem)  {
+    .site-wrapper {
+      padding: 0 0.9375rem; } }
+
+/*
+
+Site Header
+---
+Contains the much more interesting site header components; the mastead, the
+navigation and what have you.
+
+*/
+.site-header {
+  padding: 0.9375rem 0.9375rem; }
+  .site-header:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (min-width: 48rem)  {
+    .site-header {
+      padding: 1.875rem 0 2.1875rem; } }
+  @media screen and (min-width: 60rem)  {
+    .site-header {
+      padding: 2.5rem 0.9375rem; } }
+
+/*
+
+Masthead
+---
+Says "George Soros", links to the homepage.
+
+*/
+.masthead {
+  float: left;
+  display: inline-block;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1em; }
+  .masthead .logo {
+    color: #333333; }
+    .masthead .logo:hover {
+      color: #730000; }
+  @media screen and (min-width: 60rem)  {
+    .masthead {
+      font-size: 2rem; } }
+
+/*
+
+Main Navigation
+---
+Contains section links, does some really fun hiding stuff on smaller screens.
+
+*/
+.main-navigation {
+  clear: left;
+  display: none;
+  padding-top: 0.9375rem;
+  border-bottom: 1px solid #DADADA;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.875rem; }
+  .main-navigation.on {
+    display: block; }
+  @media screen and (min-width: 48rem)  {
+    .main-navigation {
+      position: relative;
+      top: 5px;
+      clear: none;
+      display: block;
+      float: right;
+      padding: 0;
+      border: 0;
+      font-size: 1rem;
+      line-height: normal; } }
+  @media screen and (min-width: 60rem)  {
+    .main-navigation {
+      position: relative;
+      top: 8px; } }
+
+/*
+
+Main Navigation Item
+---
+Provides structure for main navigation links
+
+*/
+.main-navigation-item {
+  padding: 0.3125rem;
+  border-top: 1px solid #DADADA; }
+  @media screen and (min-width: 48rem)  {
+    .main-navigation-item {
+      display: inline-block;
+      padding: 0;
+      border: 0; }
+      .main-navigation-item:not(:first-child):before {
+        content: " | ";
+        color: #DADADA;
+        margin-left: 0.1875rem;
+        padding-right: 0.1875rem; } }
+
+/*
+
+Main Navigation Link
+---
+Links inside main navigation
+
+*/
+.main-navigation-link {
+  display: block;
+  color: #888888; }
+  .current > .main-navigation-link {
+    color: #333333; }
+  .main-navigation-link:hover {
+    color: #730000; }
+  @media screen and (min-width: 48rem)  {
+    .main-navigation-link {
+      display: inline-block; } }
+
+/*
+
+Main Navigation Toggle
+---
+Button that shows and hides the main navigation. Visible only on mobile.
+
+*/
+.main-navigation-toggle {
+  position: relative;
+  top: 3px;
+  display: inline-block;
+  padding: 0 0.5rem 0 0;
+  font-size: 1rem; }
+  .main-navigation-toggle, .main-navigation-toggle:hover, .main-navigation-toggle:active {
+    color: #888888; }
+  .main-navigation-toggle, .main-navigation-toggle i {
+    vertical-align: middle; }
+  .main-navigation-toggle.on {
     position: relative;
-    display: inline-block;
-}
+    top: -3px;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    padding: 0 0 0 0.5rem; }
+  @media screen and (min-width: 48rem)  {
+    .main-navigation-toggle {
+      display: none; } }
 
-.dropdown-content {
-    display: none;
+/*
+
+Utility Navigation
+---
+Contains navigation links that don't go anywhere, but activate more complex
+navigation options like the mailing list form or the search field.
+
+*/
+.utility-navigation {
+  position: relative;
+  top: 5px;
+  float: right;
+  font-family: "freight-sans-pro", Verdana, sans-serif; }
+  @media screen and (min-width: 48rem)  {
+    .utility-navigation {
+      position: relative;
+      top: 5px; } }
+  @media screen and (min-width: 60rem)  {
+    .utility-navigation {
+      position: relative;
+      top: 8px; } }
+
+.utility-navigation-item {
+  display: inline-block; }
+  @media screen and (min-width: 33.75rem)  {
+    .utility-navigation-item {
+      position: relative; } }
+  @media screen and (min-width: 48rem)  {
+    .utility-navigation-item:before {
+      content: " | ";
+      color: #DADADA;
+      margin-left: 0.1875rem;
+      padding-right: 0.1875rem; } }
+
+.utility-navigation-link {
+  display: inline-block;
+  padding: 0 10px; }
+  .utility-navigation-link i {
+    vertical-align: middle; }
+  @media screen and (min-width: 48rem)  {
+    .utility-navigation-link {
+      padding: 0; } }
+
+/*
+
+Popovers
+---
+Small modal dialog that opens in the utility nav.
+
+*/
+.popover {
+  display: none;
+  position: absolute;
+  right: 0;
+  z-index: 4;
+  padding: 0.9375rem 0.9375rem;
+  width: 18.125rem;
+  background-color: #FFF6E3;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1px;
+  text-align: center; }
+  .popover.on {
+    display: block; }
+  @media screen and (min-width: 33.75rem)  {
+    .popover {
+      position: absolute;
+      right: 0;
+      width: 20rem; } }
+  @media screen and (min-width: 48rem)  {
+    .popover {
+      position: absolute;
+      right: -0.625rem; } }
+
+/*
+
+Popover Tab
+---
+Button that controls the popover's state. Lives in the utility nav.
+
+*/
+.popover-tab {
+  position: relative;
+  z-index: 5; }
+  .popover-tab.on {
+    color: black; }
+
+/*
+
+Popover Children
+---
+Elements that live in the popover.
+
+*/
+.popover-label {
+  margin: 0.625rem 0 0.9375rem;
+  color: rgba(0, 0, 0, 0.4); }
+
+.popover-blurb {
+  margin-bottom: 0.625rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "chaparral-pro", Georgia, serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.625rem; }
+
+.popover p {
+  margin-top: 0.625rem; }
+
+/*
+
+Site Footer
+---
+Contains the mini-bio, the mailing list signup module, the footer navigation,
+and the copyright notice.
+
+*/
+.site-footer {
+  margin: 2.8125rem 0 0 0;
+  padding: 0 0.9375rem 1.875rem; }
+  .site-footer:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (min-width: 48rem)  {
+    .site-footer {
+      padding: 0 0 1.875rem 0; } }
+  @media screen and (min-width: 60rem)  {
+    .site-footer {
+      padding: 0 0.9375rem 2.8125rem; } }
+
+/*
+
+Mini-Bio
+---
+Small bio module for use in the footer. Should have a small image and a brief
+blurb.
+
+*/
+.mini-bio {
+  margin: 0.9375rem 0;
+  font-size: 1.125rem;
+  line-height: 1.4375rem; }
+  .mini-bio:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (min-width: 48rem)  {
+    .mini-bio {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 65.8807828007%; }
+      .mini-bio:last-child {
+        margin-right: 0; } }
+
+.mini-bio-image {
+  margin-bottom: 0.9375rem; }
+  @media screen and (max-width: 47.9375rem)  {
+    .mini-bio-image {
+      position: relative;
+      top: 0.1875rem;
+      float: left;
+      margin: 0 0.625rem 0.625rem 0;
+      max-width: 9.375rem;
+      width: 40%; } }
+  @media screen and (min-width: 48rem)  {
+    .mini-bio-image {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 23.2317613015%; }
+      .mini-bio-image:last-child {
+        margin-right: 0; } }
+
+@media screen and (min-width: 48rem)  {
+  .mini-bio-blurb {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 74.4105871005%; }
+    .mini-bio-blurb:last-child {
+      margin-right: 0; } }
+
+/*
+
+Mailing List Module
+---
+Sign-up form for the mailing list. Lives in the footer.
+
+*/
+.mailing-list {
+  padding: 1.25rem 0.9375rem;
+  background-color: #E1E1E1;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  text-align: center; }
+  @media screen and (min-width: 48rem)  {
+    .mailing-list {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 31.7615656014%;
+      float: right;
+      margin-right: 0; }
+      .mailing-list:last-child {
+        margin-right: 0; } }
+  .mailing-list p + p {
+    margin-top: 10px; }
+
+.mailing-list-blurb {
+  margin-bottom: 0.9375rem; }
+
+/*
+
+Footer Navigation
+---
+Similar to the main navigation, but lives in the footer.
+
+*/
+.footer-navigation {
+  margin: 1.875rem 0;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.5rem; }
+  .footer-navigation:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (min-width: 48rem)  {
+    .footer-navigation {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 65.8807828007%;
+      margin: 0.9375rem 0; }
+      .footer-navigation:last-child {
+        margin-right: 0; } }
+
+.footer-navigation-item {
+  display: inline-block;
+  float: left;
+  width: 50%; }
+  @media screen and (min-width: 48rem)  {
+    .footer-navigation-item {
+      width: 33%; } }
+  @media screen and (min-width: 60rem)  {
+    .footer-navigation-item {
+      float: none;
+      width: auto; }
+      .footer-navigation-item:not(:first-child):before {
+        content: " | ";
+        color: #DADADA;
+        margin-left: 0.1875rem;
+        padding-right: 0.1875rem; } }
+
+/*
+
+Copyright Notice
+---
+Does what it says on the tin.
+
+*/
+.copyright-notice {
+  margin-top: 0.9375rem;
+  color: #888888;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-align: center; }
+  @media screen and (min-width: 48rem)  {
+    .copyright-notice {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 65.8807828007%;
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+      text-align: left; }
+      .copyright-notice:last-child {
+        margin-right: 0; } }
+
+/*
+
+Pagination
+---
+Next, previous, first, last, and specific page links for listed content.
+
+*/
+.pagination {
+  margin: 2.8125rem 0 0.9375rem;
+  -webkit-font-feature-settings: 'lnum';
+  color: #888888;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.4375rem;
+  text-align: center; }
+
+.pagination-item {
+  display: inline-block;
+  padding: 0 0.3125rem; }
+
+.pagination-item.prev {
+  margin-right: 0.625rem; }
+
+.pagination-item.next {
+  margin-left: 0.625rem; }
+
+/*
+
+Site Search
+---
+Search form! Appears in a popover and also on the search results page. Should be
+as portable as possible.
+
+*/
+.site-search {
+  text-align: center; }
+  @media screen and (max-width: 33.6875rem)  {
+    .site-search input[type="search"], .site-search input[type="text"] {
+      max-width: 10.625rem; } }
+
+/*
+
+Content Box
+---
+Big white box that contains main page content in most cases. Usually applied to
+`<main>`.
+
+*/
+.content-box {
+  background-color: white; }
+
+/*
+
+Page
+---
+Contains main page content for essays and other long-form pieces.
+
+*/
+.page-content {
+  margin: 0 auto;
+  padding: 1.875rem 0.9375rem;
+  font-size: 1.1875rem;
+  line-height: 1.5625rem; }
+  .page-content:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media screen and (min-width: 33.75rem)  {
+    .page-content {
+      font-size: 1.3125rem;
+      line-height: 1.5625rem; } }
+  @media screen and (min-width: 48rem)  {
+    .page-content {
+      max-width: 50rem;
+      padding: 2.8125rem; } }
+  @media screen and (min-width: 60rem)  {
+    .page-content {
+      max-width: none;
+      padding: 3.75rem 6.5625rem;
+      font-size: 1.5rem;
+      line-height: 1.875rem; } }
+
+/*
+
+Page Header
+---
+Contains title, byline, and sharing actions.
+
+*/
+.page-header {
+  position: relative;
+  margin-bottom: 1.25rem; }
+
+.page-title {
+  margin-bottom: 0.625rem;
+  font-style: italic;
+  font-size: 1.875rem;
+  line-height: 2.25rem; }
+  @media screen and (min-width: 48rem)  {
+    .page-title {
+      margin-bottom: 0.9375rem;
+      font-size: 2.5rem;
+      letter-spacing: -0.03125rem;
+      line-height: 2.8125rem; } }
+  @media screen and (min-width: 60rem)  {
+    .page-title {
+      font-size: 3.125rem;
+      line-height: 3.375rem; } }
+
+.page-subtitle {
+  margin-bottom: 2.8125rem;
+  color: #888888;
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.875rem; }
+  @media screen and (min-width: 48rem)  {
+    .page-subtitle {
+      font-size: 1.75rem;
+      line-height: 2rem; } }
+
+.page-byline {
+  color: #888888;
+  font-style: italic; }
+  @media screen and (min-width: 48rem)  {
+    .page-byline {
+      font-size: 1.25rem;
+      line-height: 1.75rem; } }
+
+/*
+
+Page Body
+---
+Provides context for several textual elements.
+
+*/
+.page-body p, .page-body blockquote, .page-body figure, .page-body ul, .page-body ol {
+  margin-bottom: 0.625rem; }
+  @media screen and (min-width: 48rem)  {
+    .page-body p, .page-body blockquote, .page-body figure, .page-body ul, .page-body ol {
+      margin-bottom: 0.9375rem; } }
+
+.page-body .deck {
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 1.875rem; }
+  @media screen and (min-width: 48rem)  {
+    .page-body .deck {
+      font-size: 1.875rem;
+      line-height: 2.5rem; } }
+
+.page-body .pull-quote {
+  margin: 1.25rem 0;
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.875rem; }
+  @media screen and (min-width: 48rem)  {
+    .page-body .pull-quote {
+      margin: 1.25rem -1.5625rem;
+      font-size: 2rem;
+      line-height: 2.25rem; } }
+  @media screen and (min-width: 60rem)  {
+    .page-body .pull-quote {
+      margin: 1.25rem -3.75rem; } }
+
+.page-body .video-wrap {
+  position: relative;
+  height: 0;
+  padding: 1.25rem 0 56.25%; }
+  .page-body .video-wrap iframe {
     position: absolute;
-    background-color: #FBEFF8;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important; }
+.page-body iframe {
+  max-width: 100%; }
+.page-body .fluid-width-video-wrapper {
+  margin-top: 2.5rem; }
 
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
+@media screen and (min-width: 33.75rem)  {
+  .page-body .align-right, .page-body .align-left {
+    max-width: 50%;
+    margin: 0 1.875rem 0.9375rem; }
+  .page-body .align-left {
+    float: left;
+    margin-left: 0; }
+  .page-body .align-right {
+    float: right;
+    margin-right: 0; } }
+@media screen and (min-width: 48rem)  {
+  .page-body .align-left {
+    margin-left: -1.875rem; }
+  .page-body .align-right {
+    margin-right: -1.875rem; } }
+@media screen and (min-width: 60rem)  {
+  .page-body .align-right, .page-body .align-left {
+    max-width: 60%; }
+  .page-body .align-left {
+    margin-left: -5rem; }
+  .page-body .align-right {
+    margin-right: -5rem; } }
+.page-body .caption-text {
+  margin: 0.625rem 0 1.25rem;
+  color: #888888;
+  font-size: 0.9375rem;
+  font-style: italic;
+  line-height: 1.25rem; }
+  @media screen and (min-width: 48rem)  {
+    .page-body .caption-text {
+      font-size: 1.125rem;
+      line-height: 1.25rem; } }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+/*
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
+Page Supplement
+---
+Contains supplementary links and actions for a page, after the main body text.
 
-.dropdown:hover .dropbtn {
-    background-color: #FBEFF8;
-}
+*/
+.page-supplement {
+  padding: 1.875rem 0.9375rem;
+  border-top: 1px solid #EFEFEF; }
+  @media screen and (min-width: 48rem)  {
+    .page-supplement {
+      padding: 2.8125rem 0.9375rem; } }
 
+/*
 
-/* --------------------- CS 135 --------------------- */
-ul.sub {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    background-color: #FBEFF8;
-    width: 15%;
-}
+Page Sharing Section
+---
+Contains sharing options. Can appear before or after the main page content,
+and is styled and positioned differently for each.
 
-ul.sub li a {
-    display: block;
-    color: black;
-    text-align: left;
-    padding: 14px 16px;
-    text-decoration: none;
-}
+*/
+.page-sharing {
+  text-align: center; }
+  .page-sharing a {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0.625rem;
+    font-size: 1.5rem;
+    line-height: 2rem; }
+  .page-sharing i {
+    vertical-align: middle; }
 
-.tree {
-    background-image: url("tree.gif");
-    background-repeat: no-repeat;
-    background-position: right top;
-    margin-right: 200px;
-    background-attachment: fixed;
-}
+.page-sharing-heading {
+  margin-bottom: 0.9375rem;
+  color: #BDBDBD;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.875rem; }
 
-.courseheader {
-    text-align: center;
-    background: url("course.jpg");
-    background-repeat: no-repeat;
-    background-size: 870px 400px;
-    margin: 0;
+.page-sharing.before a {
+  margin-top: 0.9375rem; }
+@media screen and (min-width: 60rem)  {
+  .page-sharing.before {
+    position: absolute;
+    left: -4.375rem;
+    width: 2.25rem;
+    margin-top: 1.5rem; }
+    .page-sharing.before a {
+      -webkit-transition-property: color opacity;
+      -moz-transition-property: color opacity;
+      transition-property: color opacity;
+      margin: 0 0 0.9375rem 0;
+      opacity: 0.5; }
+      .page-sharing.before a:hover {
+        opacity: 1; } }
+
+.page-sharing.after a {
+  margin-bottom: 0.625rem; }
+
+/*
+
+Book Elements
+---
+Elements for book category posts
+
+*/
+.book-image {
+  margin-bottom: 0.9375rem;
+  text-align: center; }
+  .book-image img {
     width: 100%;
-    padding: 0;
-}
+    max-width: 200px;
+    border: 1px solid #DADADA; }
 
-.solidbox {
-    background-color: #FBEFF8;
-    width: 500px;
-    padding: 25px;
-    border: 25px solid pink;
-    margin: 25px;
-    margin-left: 140px;
-    margin-top: 5px;
-}
+.book-buy {
+  margin: 1.875rem 0;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.25rem; }
+  @media screen and (max-width: 33.6875rem)  {
+    .book-buy {
+      text-align: center; } }
 
-.split {
-    margin-left: 50px;
-    border-left: 1px;
-}
+.book-buy-link {
+  display: block;
+  margin-top: 0.625rem;
+  font-weight: bold; }
 
+@media screen and (min-width: 48rem)  {
+  .book-info {
+    float: right;
+    width: 20%;
+    padding-left: 1.25rem; }
+  .book-main {
+    float: left;
+    width: 80%; } }
+
+/*
+
+Press
+---
+Components for rendering press resources
+
+*/
+.press-subsection {
+  margin-top: 1.875rem; }
+  .press-subsection:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.press-subsection-label {
+  margin-bottom: 1.25rem; }
+
+.press-resource {
+  margin-bottom: 1.875rem; }
+
+.press-resource.photo {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 48.821174201%;
+  color: transparent; }
+  .press-resource.photo:last-child {
+    margin-right: 0; }
+  @media screen and (min-width: 48rem)  {
+    .press-resource.photo {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 23.2317613015%; }
+      .press-resource.photo:last-child {
+        margin-right: 0; } }
+
+.press-quote-body {
+  color: #888888;
+  font-style: italic;
+  font-size: 1.4375rem;
+  line-height: 1.875rem; }
+  .press-quote-body blockquote:before {
+    content: "“"; }
+  .press-quote-body blockquote:after {
+    content: "”"; }
+
+/*
+
+Highlighted Content
+---
+At-a-glance review of a highlighted piece of content from each major media type:
+essays, appearances, and books. Not context-driven, but sitewide.
+
+*/
+.highlighted-content {
+  border-top: 1px solid #DADADA;
+  border-bottom: 1px solid #DADADA; }
+
+/*
+
+Highlighted Item
+---
+Single item in the highlighted content block.
+
+*/
+.highlighted-item:nth-child(3n+2) {
+  border-bottom: 0; }
+  @media screen and (min-width: 48rem)  {
+    .highlighted-item:nth-child(3n+2) {
+      border-right: 0; } }
+
+.highlighted-item-thumbnail {
+  float: left;
+  margin: 0.3125rem 0.625rem 0.625rem 0;
+  width: 3.75rem; }
+  @media screen and (min-width: 48rem)  {
+    .highlighted-item-thumbnail {
+      margin-left: -0.625rem; } }
+
+.highlighted-item-name {
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.6875rem; }
+  @media screen and (min-width: 48rem)  {
+    .highlighted-item-name {
+      font-size: 2rem;
+      line-height: 2.125rem; }
+      .with-thumbnail .highlighted-item-name {
+        margin-left: 3.75rem; } }
+
+.highlighted-item-blurb cite {
+  color: #888888; }
+.highlighted-item-blurb p {
+  margin: 0.625rem 0; }
+
+.highlighted-item-link {
+  font-style: italic; }
+
+/*
+
+OSF Directory
+---
+Contains links out to OSF content
+
+*/
+.osf-directory {
+  margin-bottom: 2.8125rem; }
+
+.osf-directory-intro {
+  margin: 0 0.9375rem 1.875rem;
+  font-size: 1.4375rem;
+  line-height: 1.75rem; }
+
+.osf-directory-heading {
+  display: block;
+  padding: 1.875rem 0 0.9375rem;
+  text-align: center; }
+
+@media screen and (min-width: 48rem)  {
+  .osf-item {
+    padding-top: 0; } }
+
+.osf-item-heading {
+  margin-bottom: 0.625rem;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.625rem; }
+
+.osf-item-date {
+  color: #888888;
+  font-style: italic; }
+
+/*
+
+Intro Media
+---
+Video-and-quote element on the homepage
+
+*/
+.intro-media {
+  margin-bottom: 1.875rem;
+  background-color: white; }
+  @media screen and (min-width: 52.5rem)  {
+    .intro-media {
+      margin: 1.875rem 0;
+      display: table; }
+      .intro-media > * {
+        display: table-cell;
+        width: 50%;
+        vertical-align: middle; } }
+
+@media screen and (min-width: 52.5rem)  {
+  .intro-media.expanded {
+    display: block; }
+    .intro-media.expanded .intro-video {
+      float: left; }
+    .intro-media.expanded .intro-quote {
+      clear: left;
+      display: block;
+      width: 100%; } }
+
+/*
+
+Intro Video
+---
+This thing is very well directed.
+
+*/
+.intro-video {
+  position: relative;
+  cursor: pointer; }
+  @media screen and (max-width: 52.4375rem)  {
+    .intro-video {
+      width: 100% !important; } }
+  .intro-video video, .intro-video object {
+    width: 100%;
+    vertical-align: middle;
+    position: relative;
+    z-index: 1; }
+  .intro-video object {
+    display: none; }
+  .intro-video:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    z-index: 3;
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    background-image: url('../img/play-button.png');
+    background-repeat: no-repeat;
+    background-size: 60px 60px; }
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 1.5/1), only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.5dppx) {
+      .intro-video:before {
+        background-image: url('../img/play-button@2x.png'); } }
+  .intro-video.expanded {
+    width: 100%; }
+    .intro-video.expanded object {
+      display: block; }
+    .intro-video.expanded:before {
+      display: none; }
+
+.intro-video-poster {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2; }
+  .expanded .intro-video-poster {
+    display: none;
+    pointer-events: none; }
+
+/*
+
+Intro Quote
+---
+George Soros has smart stuff to say. Put that stuff next to a video. Everybody
+is real happy. Yes. Yes.
+
+*/
+.intro-quote {
+  padding: 0.9375rem;
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 2rem; }
+  @media screen and (min-width: 52.5rem)  {
+    .intro-quote {
+      padding: 1.875rem;
+      font-size: 2.5rem;
+      line-height: 3.25rem; } }
+
+/*
+
+Intro Blurb
+---
+A bit of intro text. A very unassuming module, overall. 
+
+*/
+.intro-blurb {
+  margin: 1.875rem 0.9375rem 2.8125rem;
+  font-size: 1.4375rem;
+  line-height: 2.1875rem; }
+
+/*
+
+Category
+---
+Elements for category pages
+
+*/
+.category-deck {
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 1.875rem; }
+  @media screen and (min-width: 48rem)  {
+    .category-deck {
+      font-size: 1.875rem;
+      line-height: 2.5rem; } }
+
+.category-subnav {
+  margin-bottom: 1.875rem;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  text-transform: uppercase; }
+  .category-subnav a {
+    color: #888888; }
+    .category-subnav a:hover {
+      color: #CC0000; }
+    .category-subnav a.on {
+      color: #333333;
+      cursor: default; }
+  .category-subnav li {
+    margin-bottom: 0.625rem; }
+  @media screen and (min-width: 33.75rem)  {
+    .category-subnav li {
+      display: inline-block; }
+    .category-subnav li:not(:first-child):before {
+      content: " | ";
+      margin: 0 0.1875rem;
+      color: #888888;
+      font-weight: normal; } }
+
+.category-subsection {
+  display: none; }
+  .category-subsection.on {
+    display: block; }
+
+/*
+
+Excerpt
+---
+Short link to piece of content in a category or archive page.
+
+*/
+.excerpt {
+  clear: both;
+  margin: 1.875rem 0;
+  font-family: "chaparral-pro", Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.4375rem; }
+  @media screen and (min-width: 48rem)  {
+    .excerpt {
+      margin: 2.8125rem 0; } }
+
+.excerpt-thumbnail {
+  float: right;
+  margin: 0 0 0.9375rem 0.9375rem;
+  max-width: 20%;
+  width: 90px; }
+  @media screen and (min-width: 48rem)  {
+    .excerpt-thumbnail {
+      margin: 0 0 1.875rem 1.875rem; } }
+
+.excerpt-title {
+  margin-bottom: 0.625rem;
+  font-family: "freight-sans-pro", Verdana, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.6875rem; }
+  @media screen and (min-width: 48rem)  {
+    .excerpt-title {
+      font-size: 2rem;
+      line-height: 2.125rem; } }
+
+.excerpt-meta {
+  margin-bottom: 0.625rem;
+  color: #888888; }
+  .excerpt-meta li {
+    display: inline-block; }
+  .excerpt-meta li:not(:first-child):before {
+    content: " / ";
+    margin: 0 0.1875rem; }
+
+/*
+
+Search Results
+---
+Elements for display on the search results page, usually surrounding excerpts.
+
+*/
+.search-results-count {
+  margin-top: 0.9375rem;
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.75rem;
+  text-align: center; }
+
+/*
+
+Print
+---
+Overrides for print only
+
+*/
+@media print {
+  .site-header, .site-footer, .highlighted-content, .page-sharing {
+    display: none; } }
 
 
