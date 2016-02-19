@@ -1,6 +1,5 @@
 
 body {
-
     padding-top: 80px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
     font-family: 'Open Sans', sans-serif;
     background-color: #F8F8F8;
@@ -11,7 +10,6 @@ textarea {
     border-radius: 10px;
     border:solid 1px grey;
 }
-
 
 input:focus, select:focus, textarea:focus, button:focus {
     outline: none;
@@ -35,7 +33,6 @@ br {
 .logo {
     height: 150%;
     width: 250px;
-    position: relative;
 }
 
 @media(max-width:380px) {
@@ -54,7 +51,6 @@ br {
 }
 
 .navbar-default {
-    margin: 0 60px;  /* changed */
     border-color: rgba(34,34,34,.05);
     font-family: Open Sans;
     background-color: #F8F8F8;
@@ -224,21 +220,18 @@ input
 
 .banner {
     position: relative;
-    left: 5%;
-    width: 45%;
-    height: 400px;
+    /* max-width: 100%; */
+    width: 100%;
+    height: 70%;
     overflow: hidden;
 }
 
 .banner .bannercaption {
     text-align: center;
-    height:0;
-    width:100%;
-    line-height: 0;
-    font-size: 15px;
+    width:100%; height:0;
+    font-size: 25px; line-height: 0;
     color:white;
-    position:absolute;
-    top:25%;
+    position:absolute; top:21%;
     z-index:1;
 }
 
@@ -378,7 +371,7 @@ ul.social-buttons li a:active {
 {
     
     .banner img {
-        height: 30%;
+        height: 50%;
     }
     
     .footer-contents {
@@ -406,12 +399,18 @@ ul.social-buttons li a:active {
     }
     
     .main-page-content h3{
+        position: absolute;
+        top: 60%;
+        text-align: center;
         font: 200% Open Sans;
         color: #023456;
     }
     
     .main-page-content p {
-        font: 130% Open Sans;
+        position: absolute;
+        top: 70%;
+        text-align: left;
+        font: 135% Open Sans;
     }
     .newsletter h2 {
         font: 200% Open Sans;
@@ -422,7 +421,7 @@ ul.social-buttons li a:active {
     }
     
     .banner img {
-        height: 40%;
+        height: 60%;
     }
     
     .footer-contents {
@@ -479,7 +478,6 @@ ul.social-buttons li a:active {
         margin: 0px 0px 0px 0px;
     }
 }
-
 
 
 
