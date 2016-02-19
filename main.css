@@ -1,5 +1,6 @@
 
 body {
+
     padding-top: 80px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
     font-family: 'Open Sans', sans-serif;
     background-color: #F8F8F8;
@@ -10,6 +11,7 @@ textarea {
     border-radius: 10px;
     border:solid 1px grey;
 }
+
 
 input:focus, select:focus, textarea:focus, button:focus {
     outline: none;
@@ -33,6 +35,7 @@ br {
 .logo {
     height: 150%;
     width: 250px;
+    position: relative;
 }
 
 @media(max-width:380px) {
@@ -51,6 +54,7 @@ br {
 }
 
 .navbar-default {
+    margin: 0 60px;  /* changed */
     border-color: rgba(34,34,34,.05);
     font-family: Open Sans;
     background-color: #F8F8F8;
@@ -220,8 +224,9 @@ input
 
 .banner {
     position: relative;
-    width: 100%;
-    height: 200px;
+    left: 5%;
+    width: 45%;
+    height: 400px;
     overflow: hidden;
 }
 
@@ -474,3 +479,8 @@ ul.social-buttons li a:active {
         margin: 0px 0px 0px 0px;
     }
 }
+
+
+
+
+
